@@ -1,5 +1,6 @@
 {
     "teacher": {
+        "num_rows": 250,
         "teacher_id": "int",
         "name": "string",
         "surname": "string",
@@ -10,30 +11,35 @@
         "bank_account_number": "string"
     },
     "student": {
+        "num_rows": 10,
         "sudent_id": "int",
         "name": "string",
         "surname": "string",
         "age": "int"
     },
     "class": {
+        "num_rows": 10,
         "class_id": "int",
         "offer_id": "int",
         "sudent_id": "int",
         "date": "datetime"
     },
     "attendance": {
+        "num_rows": 10,
         "attendance_id": "int",
         "class_id": "int",
         "student_id": "int",
         "present": "bool"
     },
     "feedback": {
+        "num_rows": 10,
         "feedback_id": "int",
         "class_id": "int",
         "student_id": "int",
         "feedback": "int"
     },
     "offer": {
+        "num_rows": 10,
         "offer_id": "int",
         "subject_id": "int",
         "teacher_id": "int",
@@ -41,6 +47,7 @@
         "duration": "int"
     },
     "subject": {
+        "num_rows": 10,
         "subject_id": "int",
         "name": "string"
     }

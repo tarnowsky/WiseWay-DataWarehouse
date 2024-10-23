@@ -26,13 +26,19 @@ def load_json_data(filepath: Path) -> dict:
 DATA_DIRECTORY = Path('data')
 TABLE_STRUCTURES = load_json_data(DATA_DIRECTORY / 'table_structures.json')
 
+def get_data_methods(object):
+    return [method for method in dir(object) if method.endswith('_data')]
 
 if __name__ == "__main__":
     tdg = TableDataGenerator(seed=37)
-
-    save_to_csv(
-        tdg.generate_teachers_data(3), 
-        TABLE_STRUCTURES['teacher'], 
-        DATA_DIRECTORY/'teachers_excel.csv'
-    )
-    pass
+    METHODS = get_data_methods(tdg)
+    
+    for table_name, table_attr in TABLE_STRUCTURES.items():
+        method_name = next((m for m in METHODS if table_name in m), None)
+        if method_name:
+            method = getattr(tdg, method_name)
+            save_to_csv(
+                method(int(table_attr['num_rows'])),
+                [*table_attr.keys()][1:], 
+                DATA_DIRECTORY/f'{table_name}.csv'
+            )
