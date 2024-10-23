@@ -67,3 +67,17 @@ class TableDataGenerator(DataGenerator):
                 (id, name, surname, age)
             )
         return students
+    
+    def generate_feedback_data(self, num_rows: int) -> list[tuple[str, str, str, int]]:
+        feedbacks = []
+        for _ in range(num_rows):
+            feedback_id = self.fake.uuid4()
+            class_id = self.fake.uuid4()
+            student_id = self.fake.uuid4()
+            feedback = self.fake.random_int(min=1, max=5)
+            feedbacks.append(
+                (feedback_id, class_id, student_id, feedback)
+            )
+        return feedbacks
+    
+    
