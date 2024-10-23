@@ -1,0 +1,49 @@
+{
+    "teacher": {
+        "teacher_id": "int",
+        "name": "string",
+        "surname": "string",
+        "email": "string",
+        "phone_number": "int",
+        "hire_date": "datetime",
+        "pay": "int",
+        "bank_account_number": "string"
+    },
+    "student": {
+        "sudent_id": "int",
+        "name": "string",
+        "surname": "string",
+        "age": "int"
+    },
+    "class": {
+        "class_id": "int",
+        "offer_id": "int",
+        "sudent_id": "int",
+        "date": "datetime"
+    },
+    "attendance": {
+        "attendance_id": "int",
+        "class_id": "int",
+        "student_id": "int",
+        "present": "bool"
+    },
+    "feedback": {
+        "feedback_id": "int",
+        "class_id": "int",
+        "student_id": "int",
+        "feedback": "int"
+    },
+    "offer": {
+        "offer_id": "int",
+        "subject_id": "int",
+        "teacher_id": "int",
+        "level": "int",
+        "duration": "int"
+    },
+    "subject": {
+        "subject_id": "int",
+        "name": "string"
+    }
+
+
+}
