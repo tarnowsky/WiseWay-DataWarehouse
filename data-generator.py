@@ -15,16 +15,12 @@ def save_to_csv(
             with open(filename[0], mode='w', newline='') as file_1:
                 with open(filename[1], mode='w', newline='') as file_2:
                     with open(filename[2], mode='w', newline='') as file_3:
-                        writer_1 = csv.writer(file_1)
-                        writer_2 = csv.writer(file_2)
-                        writer_3 = csv.writer(file_3)
-                        writer_1.writerow(header[0])
-                        writer_2.writerow(header[1])
-                        writer_3.writerow(header[2])
+                        writers = [csv.writer(file_1), csv.writer(file_2), csv.writer(file_3)]
+                        for i, head in enumerate(header):
+                            writers[i].writerow(head)
                         for data in data_generator(num_rows):
-                            writer_1.writerow(data[0])
-                            writer_2.writerow(data[1])
-                            writer_3.writerow(data[2])
+                            for i, writer in enumerate(writers):
+                                writer.writerow(data[i])
                 
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
