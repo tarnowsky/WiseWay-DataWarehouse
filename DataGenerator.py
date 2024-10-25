@@ -3,6 +3,7 @@ from random import randint, choice
 from datetime import datetime
 from typing import Generator
 
+
 class DataGenerator:
     def __init__(self, seed=0) -> None:
         self.fake = Faker(seed)
@@ -23,6 +24,7 @@ class DataGenerator:
         email_username = f"{name.lower()}.{surname.lower()}"
         email = f"{email_username}@wiseway.com"
         return email
+
 
 class TableDataGenerator(DataGenerator):
 
@@ -50,14 +52,16 @@ class TableDataGenerator(DataGenerator):
 
     def __init__(self, seed=0) -> None:
         super().__init__(seed)
+        self.attendance_id = 0
+        self.feedback_id = 0
 
     def generate_teachers_data(self, num_rows: int) -> Generator[tuple,None,None]:
         PLATFORM_START_DATE = datetime(2015, 1, 1).strftime('%Y-%m-%d')
         NUM_OF_START_TEACHERS = 10
         AVAILABLE_PAY = [pay for pay in range(4800, 6200, 200)]
 
-        for _ in range(num_rows):
-            id = self.fake.uuid4()
+        for i in range(num_rows):
+            id = i + 1
             name = self.fake.first_name()
             surname = self.fake.last_name()
             age = self.fake.random_int(min=18, max=70)
@@ -79,8 +83,8 @@ class TableDataGenerator(DataGenerator):
             yield id, name, surname, age, email, phone_number, hire_date, pay, bank_account_number
 
     def generate_students_data(self, num_rows: int) -> Generator[tuple, None, None]:
-        for _ in range(num_rows):
-            id = self.fake.uuid4()
+        for i in range(num_rows):
+            id = i + 1
             name = self.fake.first_name()
             surname = self.fake.last_name()
             age = self.fake.random_int(min=18, max=70)
@@ -92,9 +96,9 @@ class TableDataGenerator(DataGenerator):
         if num_rows != len(self.__POSIBLE_SUBJECTS):
             raise ValueError("Number of rows in subjects table must be equal to the number of subjects.")
 
-        for _ in range(num_rows):
-            subject_id = self.fake.uuid4()
-            name = self.__POSIBLE_SUBJECTS[_]
+        for i in range(num_rows):
+            subject_id = i + 1
+            name = self.__POSIBLE_SUBJECTS[i]
             self.__SUBJECTS_IDS.append(subject_id)
             yield subject_id, name
 
@@ -103,7 +107,7 @@ class TableDataGenerator(DataGenerator):
             raise ValueError("Number of rows in offers table must be equal to the number of teachers.")
 
         for i in range(num_rows):
-            offer_id = self.fake.uuid4()
+            offer_id = i + 1
             subject_id = choice(self.__SUBJECTS_IDS)
             teacher_id = self.__TEACHERS_IDS[i]
             duration = self.fake.random_int(min=30, max=120, step=30)
@@ -112,14 +116,15 @@ class TableDataGenerator(DataGenerator):
             yield offer_id, subject_id, teacher_id, duration, level
 
     def generate_class_feedback_attendance_data(self, num_rows: int) -> Generator[tuple[tuple], None, None]:
-        for _ in range(num_rows):
-            class_id = self.fake.uuid4()
+        for i in range(num_rows):
+            class_id = i + 1
             class_data = self.generate_class_data(class_id)
-            feedback_data = self.generate_feedback_data(class_id)
-            attendance_data = self.generate_attendance_data(class_id)
+            number_of_students = self.fake.random_int(min=1, max=5)
+            feedback_data = self.generate_feedback_data(class_id, number_of_students)
+            attendance_data = self.generate_attendance_data(class_id, number_of_students)
             yield class_data, feedback_data, attendance_data
 
-    def generate_class_data(self, class_id: str) -> tuple:
+    def generate_class_data(self, class_id: int) -> tuple:
         offer_id = choice(self.__OFFERS_IDS)
         student_id = choice(self.__STUDENTS_IDS)
         date = self._generate_random_date_between(
@@ -127,20 +132,25 @@ class TableDataGenerator(DataGenerator):
             end_date=datetime(2023, 12, 31)
         )
         return class_id, offer_id, student_id, date
-    
-    def generate_feedback_data(self, class_id: str) -> tuple:
-        feedback_id = self.fake.uuid4()
-        feedback = self.fake.random_int(min=1, max=5)
-        return feedback_id, class_id, feedback
-    
-    def generate_attendance_data(self, class_id: str) -> tuple:
-        attendance_id = self.fake.uuid4()
-        present = self.fake.boolean()
-        return attendance_id, class_id, present
+
+    def generate_feedback_data(self, class_id: int, number_of_students: int) -> list[tuple]:
+        feedback_records = []
+        for _ in range(number_of_students):
+            self.feedback_id += 1
+            feedback_id = self.feedback_id
+            feedback = self.fake.random_int(min=1, max=5)
+            feedback_records.append((feedback_id, class_id, feedback))
+        return feedback_records
+
+    def generate_attendance_data(self, class_id: int, number_of_students: int) -> list[tuple]:
+        attendance_records = []
+        for _ in range(number_of_students):
+            self.attendance_id += 1
+            attendance_id = self.attendance_id
+            present = self.fake.boolean()
+            attendance_records.append((attendance_id, class_id, present))
+        return attendance_records
     
     def get_possible_subjects(self):
         return self.__POSIBLE_SUBJECTS
-    
-
-    
     
