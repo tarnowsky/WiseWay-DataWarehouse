@@ -1,5 +1,5 @@
 import csv
-from DataGenerator import TableDataGenerator
+from DataGenerator.DataGenerator import *
 from pathlib import Path
 import json
 from typing import Generator
