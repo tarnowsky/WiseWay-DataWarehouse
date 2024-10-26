@@ -100,6 +100,6 @@ if __name__ == "__main__":
             TABLE_STRUCTURES['attendance'].keys()
         ],
         data_generator=tdg.generate_class_feedback_attendance_data,
-        num_rows=1000
+        num_rows=850_000
     )
     
