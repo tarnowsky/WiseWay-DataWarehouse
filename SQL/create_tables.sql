@@ -1,14 +1,20 @@
+CREATE DATABASE WiseDB;
+GO
+USE WiseDB;
+
 CREATE TABLE student (
 	student_id INT PRIMARY KEY NOT NULL,
 	name NVARCHAR(255),
 	surname NVARCHAR(255),
 	age INT
 );
+GO
 
 CREATE TABLE subject (
     subject_id INT PRIMARY KEY NOT NULL,
     name NVARCHAR(255)
 );
+GO
 
 CREATE TABLE offer (
     offer_id INT PRIMARY KEY NOT NULL,
@@ -18,6 +24,7 @@ CREATE TABLE offer (
     duration INT,
     FOREIGN KEY (subject_id) REFERENCES subject(subject_id)
 );
+GO
 
 CREATE TABLE class (
     class_id INT PRIMARY KEY NOT NULL,
@@ -27,6 +34,7 @@ CREATE TABLE class (
     FOREIGN KEY (offer_id) REFERENCES offer(offer_id),
     FOREIGN KEY (student_id) REFERENCES student(student_id)
 );
+GO
 
 CREATE TABLE attendance (
     attendance_id INT PRIMARY KEY NOT NULL,
@@ -34,6 +42,7 @@ CREATE TABLE attendance (
     present BIT,
     FOREIGN KEY (class_id) REFERENCES class(class_id)
 );
+GO
 
 CREATE TABLE feedback (
     feedback_id INT PRIMARY KEY NOT NULL,
@@ -41,3 +50,4 @@ CREATE TABLE feedback (
     feedback INT,
     FOREIGN KEY (class_id) REFERENCES class(class_id)
 );
+GO
