@@ -149,7 +149,7 @@ class TableDataGenerator(DataGenerator):
         for _ in range(number_of_students):
             self.attendance_id += 1
             attendance_id = self.attendance_id
-            present = self.fake.boolean()
+            present = self.fake.random_int(min=0, max=1)
             present_students -= 1 if not present else 0
             attendance_records.append((attendance_id, class_id, present))
         return attendance_records, present_students
