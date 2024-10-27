@@ -1,17 +1,17 @@
 CREATE TABLE student (
-	student_id INT PRIMARY KEY,
+	student_id INT PRIMARY KEY NOT NULL,
 	name NVARCHAR(255),
 	surname NVARCHAR(255),
 	age INT
 );
 
 CREATE TABLE subject (
-    subject_id INT PRIMARY KEY,
+    subject_id INT PRIMARY KEY NOT NULL,
     name NVARCHAR(255)
 );
 
 CREATE TABLE offer (
-    offer_id INT PRIMARY KEY,
+    offer_id INT PRIMARY KEY NOT NULL,
     subject_id INT,
     teacher_id INT,
     level INT,
@@ -20,7 +20,7 @@ CREATE TABLE offer (
 );
 
 CREATE TABLE class (
-    class_id INT PRIMARY KEY,
+    class_id INT PRIMARY KEY NOT NULL,
     offer_id INT,
     student_id INT,
     date DATETIME,
@@ -29,14 +29,14 @@ CREATE TABLE class (
 );
 
 CREATE TABLE attendance (
-    attendance_id INT PRIMARY KEY,
+    attendance_id INT PRIMARY KEY NOT NULL,
     class_id INT,
     present BIT,
     FOREIGN KEY (class_id) REFERENCES class(class_id)
 );
 
 CREATE TABLE feedback (
-    feedback_id INT PRIMARY KEY,
+    feedback_id INT PRIMARY KEY NOT NULL,
     class_id INT,
     feedback INT,
     FOREIGN KEY (class_id) REFERENCES class(class_id)
