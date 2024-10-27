@@ -120,8 +120,8 @@ class TableDataGenerator(DataGenerator):
             class_id = i + 1
             class_data = self.generate_class_data(class_id)
             number_of_students = self.fake.random_int(min=1, max=5)
-            feedback_data = self.generate_feedback_data(class_id, number_of_students)
-            attendance_data = self.generate_attendance_data(class_id, number_of_students)
+            attendance_data, present_students = self.generate_attendance_data(class_id, number_of_students)
+            feedback_data = self.generate_feedback_data(class_id, present_students)
             yield class_data, feedback_data, attendance_data
 
     def generate_class_data(self, class_id: int) -> tuple:
@@ -144,12 +144,14 @@ class TableDataGenerator(DataGenerator):
 
     def generate_attendance_data(self, class_id: int, number_of_students: int) -> list[tuple]:
         attendance_records = []
+        present_students = number_of_students
         for _ in range(number_of_students):
             self.attendance_id += 1
             attendance_id = self.attendance_id
             present = self.fake.boolean()
+            present_students -= 1 if not present else 0
             attendance_records.append((attendance_id, class_id, present))
-        return attendance_records
+        return attendance_records, present_students
     
     def get_possible_subjects(self):
         return self.__POSIBLE_SUBJECTS
