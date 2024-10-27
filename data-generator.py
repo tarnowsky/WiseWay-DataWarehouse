@@ -9,10 +9,10 @@ DATA_DIRECTORY = Path('data')
 START_DATE = datetime(2015, 1, 1)
 END_DATE = datetime(2018, 12, 31)
 
+
 def save_to_csv(
         data_generator: Generator[tuple, None, None] | Generator[tuple[tuple], None, None],
         num_rows: int,
-        header: list[str] | list[list[str]],
         filename: Path | list[Path]) -> None:
     try:
         if isinstance(filename, list):
@@ -21,9 +21,6 @@ def save_to_csv(
                     open(filename[2], mode='w', newline='') as file_3:
 
                 writers = [csv.writer(file_1), csv.writer(file_2), csv.writer(file_3)]
-
-                for i, head in enumerate(header):
-                    writers[i].writerow(head)
 
                 for class_data, feedback_data, attendance_data in data_generator(num_rows):
                     writers[0].writerow(class_data)
@@ -38,7 +35,6 @@ def save_to_csv(
         else:
             with open(filename, mode='w', newline='') as file:
                 writer = csv.writer(file)
-                writer.writerow(header)
                 for data in data_generator(num_rows):
                     writer.writerow(data)
             filenames_str = str(filename)
