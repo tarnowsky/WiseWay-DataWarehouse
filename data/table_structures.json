@@ -19,7 +19,7 @@
         "class_id": "int",
         "offer_id": "int",
         "sudent_id": "int",
-        "date": "datetime"
+        "date_time": "datetime"
     },
     "attendance": {
         "attendance_id": "int",

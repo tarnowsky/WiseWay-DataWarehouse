@@ -5,12 +5,22 @@ from typing import Generator
 
 
 class DataGenerator:
-    def __init__(self, seed=0) -> None:
+    def __init__(self, start_date: datetime, end_date: datetime, seed=0) -> None:
         self.fake = Faker(seed)
+        self.start_date = start_date
+        self.end_date = end_date
     
-    def _generate_random_date_between(self, start_date: datetime, end_date: datetime) -> str:
-        random_date = self.fake.date_between(start_date=start_date, end_date=end_date)
+    def _generate_random_date_between(self) -> str:
+        random_date = self.fake.date_between(start_date=self.start_date, end_date=self.end_date)
         return random_date.strftime('%Y-%m-%d')
+
+    def _generate_random_date_time(self) -> str:
+        available_hours = [
+            '14:00:00',
+            '16:00:00',
+            '18:00:00',
+        ]
+        return self._generate_random_date_between() + ' ' + choice(available_hours)
 
     def _generate_phone_number(self) -> str:
         first_digit = str(randint(1, 9))
@@ -50,13 +60,13 @@ class TableDataGenerator(DataGenerator):
         "Język_niemiecki",
     ]
 
-    def __init__(self, seed=0) -> None:
-        super().__init__(seed)
+    def __init__(self, start_date, end_date, seed=0) -> None:
+        super().__init__(start_date, end_date, seed)
         self.attendance_id = 0
         self.feedback_id = 0
 
     def generate_teachers_data(self, num_rows: int) -> Generator[tuple,None,None]:
-        PLATFORM_START_DATE = datetime(2015, 1, 1).strftime('%Y-%m-%d')
+        PLATFORM_START_DATE = '2015-01-01'
         NUM_OF_START_TEACHERS = 10
         AVAILABLE_PAY = [pay for pay in range(4800, 6200, 200)]
 
@@ -69,15 +79,12 @@ class TableDataGenerator(DataGenerator):
             phone_number = self._generate_phone_number()
             pay = choice(AVAILABLE_PAY)
             bank_account_number = self._generate_bank_account_number()
-        
-            if NUM_OF_START_TEACHERS:
+
+            if PLATFORM_START_DATE == self.start_date and NUM_OF_START_TEACHERS:
                 hire_date = PLATFORM_START_DATE
                 NUM_OF_START_TEACHERS -= 1
             else:
-                hire_date = self._generate_random_date_between(
-                    start_date=datetime(2015, 1, 1), 
-                    end_date=datetime(2018, 12, 31)
-                )
+                hire_date = self._generate_random_date_between()
 
             self.__TEACHERS_IDS.append(id)
             yield id, name, surname, age, email, phone_number, hire_date, pay, bank_account_number
@@ -103,17 +110,14 @@ class TableDataGenerator(DataGenerator):
             yield subject_id, name
 
     def generate_offer_data(self, num_rows: int) -> Generator[tuple, None, None]:
-        if num_rows != len(self.__TEACHERS_IDS):
-            raise ValueError("Number of rows in offers table must be equal to the number of teachers.")
-
         for i in range(num_rows):
             offer_id = i + 1
             subject_id = choice(self.__SUBJECTS_IDS)
-            teacher_id = self.__TEACHERS_IDS[i]
+            teacher_id = choice(self.__TEACHERS_IDS)
             duration = self.fake.random_int(min=30, max=120, step=30)
             level = self.fake.random_int(min=1, max=3)
             self.__OFFERS_IDS.append(offer_id)
-            yield offer_id, subject_id, teacher_id, duration, level
+            yield offer_id, subject_id, teacher_id, level, duration
 
     def generate_class_feedback_attendance_data(self, num_rows: int) -> Generator[tuple[tuple], None, None]:
         for i in range(num_rows):
@@ -127,10 +131,7 @@ class TableDataGenerator(DataGenerator):
     def generate_class_data(self, class_id: int) -> tuple:
         offer_id = choice(self.__OFFERS_IDS)
         student_id = choice(self.__STUDENTS_IDS)
-        date = self._generate_random_date_between(
-            start_date=datetime(2015, 1, 1), 
-            end_date=datetime(2023, 12, 31)
-        )
+        date = self._generate_random_date_time()
         return class_id, offer_id, student_id, date
 
     def generate_feedback_data(self, class_id: int, number_of_students: int) -> list[tuple]:
