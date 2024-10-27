@@ -3,7 +3,11 @@ from DataGenerator import TableDataGenerator
 from pathlib import Path
 import json
 from typing import Generator
+from datetime import datetime
 
+DATA_DIRECTORY = Path('data')
+START_DATE = datetime(2015, 1, 1)
+END_DATE = datetime(2018, 12, 31)
 
 def save_to_csv(
         data_generator: Generator[tuple, None, None] | Generator[tuple[tuple], None, None],
@@ -53,7 +57,6 @@ def load_json_data(filepath: Path) -> dict:
         Exception(f"Error while loading {filepath}: {e}")
 
 
-DATA_DIRECTORY = Path('data')
 TABLE_STRUCTURES = load_json_data(DATA_DIRECTORY / 'table_structures.json')
 
 
@@ -66,19 +69,23 @@ def save_table_data(table_name, table_header, data_generator, num_rows):
 
 
 if __name__ == "__main__":
-    tdg = TableDataGenerator(seed=37)
+    tdg = TableDataGenerator(
+        START_DATE,
+        END_DATE,
+        seed=37
+    )
 
     save_table_data(
         table_name='teacher', 
         table_header=TABLE_STRUCTURES['teacher'].keys(), 
         data_generator=tdg.generate_teachers_data, 
-        num_rows=25000
+        num_rows=500
     )
     save_table_data(
         table_name='student', 
         table_header=TABLE_STRUCTURES['student'].keys(), 
         data_generator=tdg.generate_students_data, 
-        num_rows=300000
+        num_rows=10_000
     )
     save_table_data(
         table_name='subject', 
@@ -90,7 +97,7 @@ if __name__ == "__main__":
         table_name='offer', 
         table_header=TABLE_STRUCTURES['offer'].keys(), 
         data_generator=tdg.generate_offer_data,
-        num_rows=25000
+        num_rows=1700
     )
     save_table_data(
         table_name=['class', 'feedback', 'attendance'],
@@ -100,6 +107,6 @@ if __name__ == "__main__":
             TABLE_STRUCTURES['attendance'].keys()
         ],
         data_generator=tdg.generate_class_feedback_attendance_data,
-        num_rows=1000000
+        num_rows=850_000
     )
     
