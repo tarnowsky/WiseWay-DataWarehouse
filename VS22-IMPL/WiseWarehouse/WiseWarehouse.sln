@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "WiseWarehouse", "WiseWarehouse.dwproj", "{C3FDF6FE-030C-435A-8CE3-4EBF49C9CBC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3FDF6FE-030C-435A-8CE3-4EBF49C9CBC2}.Development|Default.ActiveCfg = Development
+		{C3FDF6FE-030C-435A-8CE3-4EBF49C9CBC2}.Development|Default.Build.0 = Development
+		{C3FDF6FE-030C-435A-8CE3-4EBF49C9CBC2}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {852954EF-43B0-4022-9CB4-BD65AD862FE7}
+	EndGlobalSection
+EndGlobal
