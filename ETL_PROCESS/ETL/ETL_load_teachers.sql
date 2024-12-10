@@ -14,8 +14,8 @@ CREATE TABLE dbo.teachersTemp (
     Salary INT,
     BankAccount VARCHAR(50),
     Education VARCHAR(50),
-    WorkExperience INT
-    PESEL VARCHAR(11),
+    WorkExperience INT,
+    PESEL VARCHAR(11)
 );
 go
 
@@ -62,9 +62,9 @@ MERGE INTO TEACHER AS TT
                 THEN
                     INSERT
                     VALUES (
-                        ST.NameAndSurname,
-                        ST.PESEL,
                         ST.AgeCategory,
+                        ST.PESEL,
+                        ST.NameAndSurname,
                         ST.Education,
                         ST.WorkExperience,
                         1

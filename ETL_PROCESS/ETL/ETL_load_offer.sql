@@ -1,47 +1,40 @@
-use Warehouse
-go
+USE Warehouse;
+GO
 
-if (object_id('vETLDimOffer') is not null) drop view vETLDimOffer;
-go
+-- Drop view if exists
+IF (OBJECT_ID('vETLDimOffer') IS NOT NULL)
+    DROP VIEW vETLDimOffer;
+GO
 
-create view vETLDimOffer
-as
-SELECT DISTINCT
-    [name] as [Subject],
+-- Create a view to transform data
+CREATE VIEW vETLDimOffer AS
+SELECT
+    s.[name] AS [Subject],
     CASE
-        WHEN [level] = 1 THEN 'podstawowy / a'
-        WHEN [level] = 2 THEN 'sredni / b'
+        WHEN o.[level] = 1 THEN 'podstawowy / a'
+        WHEN o.[level] = 2 THEN 'sredni / b'
         ELSE 'zaawansowany / c'
-    END as [LevelCategory],
+    END AS [LevelCategory],
     CASE
-        WHEN [duration] >= 30 AND [duration] <= 60 THEN 'od 30 minut do 1 godziny'
-        WHEN [duration] > 60 AND [duration] <= 90 THEN 'od 1 godziny do 1,5 godziny'
+        WHEN o.duration >= 30 AND o.duration <= 60 THEN 'od 30 minut do 1 godziny'
+        WHEN o.duration > 60 AND o.duration <= 90 THEN 'od 1 godziny do 1,5 godziny'
         ELSE 'od 1,5 godziny'
-    END as [DurationCategory]
-FROM [WiseDB].dbo.[offer]
-JOIN [WiseDB].dbo.[subject] ON [WiseDB].dbo.[offer].[subject_id] = [WiseDB].dbo.[subject].[subject_id];
-go
+    END AS [DurationCategory]
+FROM [WiseDB].dbo.[offer] AS o
+JOIN [WiseDB].dbo.[subject] AS s
+    ON o.subject_id = s.subject_id;
+GO
 
+-- Merge data into Warehouse.OFFER table
 MERGE INTO OFFER AS TT
-    USING vETLDimOffer AS ST
-        ON TT.Subject = ST.Subject
-        AND TT.LevelCategory = ST.LevelCategory
-        AND TT.DurationCategory = ST.DurationCategory
-            WHEN NOT Matched
-                THEN
-                    INSERT
-                    VALUES (
-                        ST.Subject,
-                        ST.LevelCategory,
-                        ST.DurationCategory
-                    )
-            WHEN NOT Matched BY Source
-                THEN
-                    DELETE
-            ;
+USING vETLDimOffer AS ST
+ON TT.[Subject] = ST.[Subject]
+   AND TT.[LevelCategory] = ST.[LevelCategory]
+   AND TT.[DurationCategory] = ST.[DurationCategory]
+WHEN NOT MATCHED THEN
+    INSERT ([Subject], [LevelCategory], [DurationCategory])
+    VALUES (ST.[Subject], ST.[LevelCategory], ST.[DurationCategory]);
 
-drop view vETLDimOffer;
-
-
-    
-    
+-- Clean up by dropping the view
+DROP VIEW vETLDimOffer;
+GO

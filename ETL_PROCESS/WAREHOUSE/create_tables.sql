@@ -35,7 +35,7 @@ CREATE TABLE TEACHER (
 
 CREATE TABLE STUDENT (
     ID_Student INT PRIMARY KEY IDENTITY(1,1),
-    [Login] VARCHAR(50) UNIQUE,
+    [Login] VARCHAR(50),
     NameAndSurname VARCHAR(100),
     AgeCategory VARCHAR(20) NOT NULL,
     IsCurrent BIT NOT NULL

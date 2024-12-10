@@ -1,0 +1,5 @@
+SELECT * from dbo.STUDENT where [Login] IN ('JMill835', 'MHamm899');
+
+JMill835
+MHamm899
+

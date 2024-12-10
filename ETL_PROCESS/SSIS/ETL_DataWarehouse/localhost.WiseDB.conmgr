@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="localhost.WiseDB"
+  DTS:DTSID="{BF46AC5D-1048-4CC7-8817-7812FB73C486}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;Initial Catalog=WiseDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-ETL_DataWarehouse-{BF46AC5D-1048-4CC7-8817-7812FB73C486}localhost.WiseDB;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

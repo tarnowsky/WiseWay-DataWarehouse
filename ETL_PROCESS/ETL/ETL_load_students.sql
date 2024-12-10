@@ -32,9 +32,8 @@ MERGE INTO Student AS TT
                         ST.AgeCategory,
                         1
                     )
-            WHEN NOT Matched BY Source
+            WHEN NOT MATCHED BY SOURCE AND TT.isCurrent = 1
                 THEN
-                    DELETE
-            ;
+            UPDATE SET TT.isCurrent = 0;
 
 Drop View vETLStudentsData;

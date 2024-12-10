@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Integration Services Project1", "Integration Services Project1.dtproj", "{5F0E108E-8E66-4830-A712-928410933B78}"
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "ETL_DataWarehouse", "ETL_DataWarehouse.dtproj", "{02D18F32-B1DB-4524-ADDF-50DE6BA54FC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F0E108E-8E66-4830-A712-928410933B78}.Development|Default.ActiveCfg = Development
-		{5F0E108E-8E66-4830-A712-928410933B78}.Development|Default.Build.0 = Development
+		{02D18F32-B1DB-4524-ADDF-50DE6BA54FC0}.Development|Default.ActiveCfg = Development
+		{02D18F32-B1DB-4524-ADDF-50DE6BA54FC0}.Development|Default.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {68781ABD-4282-4725-BDC8-E658D1389CA1}
+		SolutionGuid = {28E2DC1A-123B-447F-A510-EA55EB16A770}
 	EndGlobalSection
 EndGlobal

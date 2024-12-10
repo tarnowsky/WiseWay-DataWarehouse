@@ -1,4 +1,4 @@
-﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="834e89bc-c594-4239-b8d5-dea47ee066f3" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="7b4a60a9-3d5e-4d4d-b21c-91551059accd" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>Warehouse</ID>
   <Name>Warehouse</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -8,7 +8,7 @@
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
       <Value>
         <dds xmlns="">
-          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="24" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-687" scrolltop="3370" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="19156" y="15558" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="24" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-687" scrolltop="-2381" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="34951" y="21220" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
             <font>
               <ddsxmlobjectstreamwrapper binary="01ee0000900144420100065461686f6d61" />
             </font>
@@ -204,7 +204,7 @@
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
-      <Value>3370</Value>
+      <Value>-2381</Value>
     </Annotation>
     <Annotation>
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
@@ -222,159 +222,159 @@
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
   <Dimensions>
-    <Dimension dwd:design-time-name="29074e19-7589-48fc-9300-d2a67d910359">
+    <Dimension dwd:design-time-name="f4829c11-ee4f-4bba-bc20-e39f93276a61">
       <ID>OFFER</ID>
       <Name>OFFER</Name>
       <DimensionID>OFFER</DimensionID>
       <Attributes>
-        <Attribute dwd:design-time-name="89b3d9b9-9044-4fc7-910f-f25e06773930">
+        <Attribute dwd:design-time-name="a0e6b0eb-518c-4bff-ad47-54b37c36cf25">
           <AttributeID>ID Offer</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="26c1588f-4c43-433f-a4ee-3827fdc3af7f">
+        <Attribute dwd:design-time-name="85eaa2be-e3a0-4227-9460-3705f3d6ae84">
           <AttributeID>Subject</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="7809aad2-e158-46b3-9f96-85ebfa298ae5">
+        <Attribute dwd:design-time-name="905b5aff-8eb8-4976-99ec-101f9b083981">
           <AttributeID>Level Category</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="c4098fb9-5516-4114-a878-6e4d5c86b226">
+        <Attribute dwd:design-time-name="4d512507-a5ae-4514-a0b3-8479334cc414">
           <AttributeID>Duration Category</AttributeID>
         </Attribute>
       </Attributes>
       <Hierarchies>
-        <Hierarchy dwd:design-time-name="8b6bb50c-0aaf-4491-9bd9-7d507ad7051b">
+        <Hierarchy dwd:design-time-name="5fd9880e-7e23-4732-bf75-cb1a81d4b0d4">
           <HierarchyID>Hierarchy</HierarchyID>
         </Hierarchy>
       </Hierarchies>
     </Dimension>
-    <Dimension dwd:design-time-name="241e122a-5250-4f3c-8425-d57861af5bb0">
+    <Dimension dwd:design-time-name="380a493c-410a-4c8b-9963-c6fbc215a124">
       <ID>TIME</ID>
       <Name>TIME</Name>
       <DimensionID>TIME</DimensionID>
       <Attributes>
-        <Attribute dwd:design-time-name="4b9d436e-c207-4d82-80bf-0561b0a32e91">
+        <Attribute dwd:design-time-name="047cf8bb-b645-4bce-9ba8-69541b1c5c50">
           <AttributeID>ID Time</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="edc69ffd-5ac1-4558-b890-96aeb651490f">
+        <Attribute dwd:design-time-name="f86a65ac-cdaa-4be2-a4af-744d26b9d680">
           <AttributeID>Hour</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="7b185a4d-8e42-4ab7-924e-e2b395b5954c">
+        <Attribute dwd:design-time-name="82a52494-ea3c-44ef-b7f0-4d731af9c5e6">
           <AttributeID>Time Of Day</AttributeID>
         </Attribute>
       </Attributes>
       <Hierarchies>
-        <Hierarchy dwd:design-time-name="4b33683b-73ec-4e2a-9d7a-f689d6df6a88">
+        <Hierarchy dwd:design-time-name="738ef611-36fa-4b6d-a5c0-5fcb97a1e863">
           <HierarchyID>Hierarchy</HierarchyID>
         </Hierarchy>
       </Hierarchies>
     </Dimension>
-    <Dimension dwd:design-time-name="71d7669c-af86-4980-b562-115bdf680d0a">
+    <Dimension dwd:design-time-name="1534ee80-0c0b-4260-bf63-1f07f505d1d3">
       <ID>STUDENT</ID>
       <Name>STUDENT</Name>
       <DimensionID>STUDENT</DimensionID>
       <Attributes>
-        <Attribute dwd:design-time-name="ca9a9d89-33eb-41a9-9574-36376a500819">
+        <Attribute dwd:design-time-name="82054f2a-bc46-482b-a288-5babcae432fd">
           <AttributeID>ID Student</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="c4f3b75d-88ec-4c51-b0a0-a843f9b1fa57">
+        <Attribute dwd:design-time-name="802b7c05-ba81-4468-b711-d90c1475b1d8">
           <AttributeID>Login</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="38fb3681-e3b8-4356-9dc2-7dff38a7ff6d">
+        <Attribute dwd:design-time-name="d65f98c7-4625-477c-bc1b-de81c9f61503">
           <AttributeID>Name And Surname</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="c9fb592a-74e9-4fef-8a8e-66b15feaf095">
+        <Attribute dwd:design-time-name="fee3f733-95f8-4a37-be2f-5925c870763e">
           <AttributeID>Age Category</AttributeID>
         </Attribute>
       </Attributes>
     </Dimension>
-    <Dimension dwd:design-time-name="17054f96-712b-4b34-9717-0624491a4dfd">
+    <Dimension dwd:design-time-name="81ea6fa0-6cb0-48ec-98ae-22dced46ef7d">
       <ID>DATE</ID>
       <Name>DATE</Name>
       <DimensionID>DATE</DimensionID>
       <Attributes>
-        <Attribute dwd:design-time-name="aa742596-216b-43e7-8161-8bf2761bdf2c">
+        <Attribute dwd:design-time-name="1f627349-0d5d-4851-910e-a1440f8f3f61">
           <AttributeID>ID Date</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="c52a99bd-75df-4579-b21c-4cce52445d56">
+        <Attribute dwd:design-time-name="09fec238-46da-48a7-b219-96c14dcbac7d">
           <AttributeID>Date</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="6e18f831-fc44-4d19-8023-d40db44025b0">
+        <Attribute dwd:design-time-name="916ba105-206b-4f95-a090-f66718f50a0e">
           <AttributeID>Year</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="bb4e2c79-0641-4c83-84af-3851082447f7">
+        <Attribute dwd:design-time-name="ab007024-d0d5-4853-9049-2f93c82b08fc">
           <AttributeID>Month</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="e6d0edf6-ee22-40fa-a777-dd0b603d1c60">
+        <Attribute dwd:design-time-name="9fd62504-943b-4888-ac33-c8c0b5ecad9e">
           <AttributeID>Month No</AttributeID>
           <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
         </Attribute>
-        <Attribute dwd:design-time-name="cb50d6d1-1f55-4947-9a06-aef96c11b462">
+        <Attribute dwd:design-time-name="e7460267-241a-4eb4-8167-2a97520258f8">
           <AttributeID>Day Of Week</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="dcd67168-19d7-40d8-9bcd-b890bc4416cc">
+        <Attribute dwd:design-time-name="062133c1-a37b-4b49-928f-4e030731a148">
           <AttributeID>Day Of Week No</AttributeID>
           <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
         </Attribute>
-        <Attribute dwd:design-time-name="e485df6f-b25b-4b3d-b9df-1b50ba5b8c23">
+        <Attribute dwd:design-time-name="05144020-ecbe-4a83-a1a1-84888c1499b9">
           <AttributeID>Working Day</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="58788c85-6860-4e50-b6f0-71c72ea77ae7">
+        <Attribute dwd:design-time-name="dfc222d9-ff8d-45c0-b910-1ca6a5179eb0">
           <AttributeID>Vacation</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="891ca695-7602-471d-9898-2af9ca584b0d">
+        <Attribute dwd:design-time-name="2641e718-c9ee-455f-b09d-9be9b50c22e6">
           <AttributeID>Holiday</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="6d48fdda-2905-46c8-bdf6-7fc6a201243b">
+        <Attribute dwd:design-time-name="245bcea8-811c-435b-a794-f79f035ea622">
           <AttributeID>Before Holiday Day</AttributeID>
         </Attribute>
       </Attributes>
       <Hierarchies>
-        <Hierarchy dwd:design-time-name="15342543-1910-4b89-ae6b-71cb8aeec751">
+        <Hierarchy dwd:design-time-name="41abd9cb-985d-4c76-8552-6517908c3347">
           <HierarchyID>Hierarchy</HierarchyID>
         </Hierarchy>
-        <Hierarchy dwd:design-time-name="b1aea6ca-4305-4d8f-8196-04825a90827c">
+        <Hierarchy dwd:design-time-name="7a79b06e-a433-4ed8-a2b5-50315c36c922">
           <HierarchyID>Hierarchy 1</HierarchyID>
         </Hierarchy>
-        <Hierarchy dwd:design-time-name="4b1bff12-fb5e-4d88-b3a4-d5fdc279a1dc">
+        <Hierarchy dwd:design-time-name="38c30ef2-19a0-4d61-a72c-afb7025e2d18">
           <HierarchyID>Hierarchy 2</HierarchyID>
         </Hierarchy>
-        <Hierarchy dwd:design-time-name="11605fa8-7cb3-4bdf-b058-4a8c207a39a6">
+        <Hierarchy dwd:design-time-name="25c947a9-7838-4d56-9616-db3d41dd5d46">
           <HierarchyID>Hierarchy 3</HierarchyID>
         </Hierarchy>
       </Hierarchies>
     </Dimension>
-    <Dimension dwd:design-time-name="b97acdd8-50cd-4d4a-aa86-0a578d37bbc4">
+    <Dimension dwd:design-time-name="fe6b2184-4694-49ce-bfc9-979bba258841">
       <ID>TEACHER</ID>
       <Name>TEACHER</Name>
       <DimensionID>TEACHER</DimensionID>
       <Attributes>
-        <Attribute dwd:design-time-name="b9b08bef-d3ca-45ab-9d15-eb245b727c9f">
+        <Attribute dwd:design-time-name="5c359f76-702d-403f-b589-b6cf48b1ec90">
           <AttributeID>ID Teacher</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="141bea64-e1a5-4579-b664-6d99e701d056">
+        <Attribute dwd:design-time-name="69264d10-1993-4535-8e27-4371fcc619da">
           <AttributeID>Age Category</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="0f8d34f5-627a-4f1d-8617-999b27a27fec">
+        <Attribute dwd:design-time-name="7fae4a35-7a70-4c99-b82f-08b6422e073b">
           <AttributeID>PESEL</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="310a05c2-5303-402a-864c-2f427eb7b12b">
+        <Attribute dwd:design-time-name="68a4f5ab-c803-4612-9ada-1791cfee3d95">
           <AttributeID>Name And Surname</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="429bf926-9218-4c3f-b322-9dd3bf0ad246">
+        <Attribute dwd:design-time-name="21975fff-f72d-458b-b767-59cf9252644e">
           <AttributeID>Education</AttributeID>
         </Attribute>
-        <Attribute dwd:design-time-name="16f2285b-a048-49bf-a6d3-e2ae31d49aaa">
+        <Attribute dwd:design-time-name="dd36d243-1f00-4e85-a886-4378d137c94c">
           <AttributeID>Work Experience</AttributeID>
         </Attribute>
       </Attributes>
       <Hierarchies>
-        <Hierarchy dwd:design-time-name="058d9769-91e1-43c1-9c7a-d19fd41a3391">
+        <Hierarchy dwd:design-time-name="2d01ceb6-fbe5-41ef-b848-4d05a4438630">
           <HierarchyID>Hierarchy</HierarchyID>
         </Hierarchy>
       </Hierarchies>
     </Dimension>
   </Dimensions>
   <MeasureGroups>
-    <MeasureGroup dwd:design-time-name="0588361c-fe24-4660-86c0-e3a98069a109">
+    <MeasureGroup dwd:design-time-name="63072809-0538-4568-8bf9-d362c0ba042f">
       <ID>CLASSRUN</ID>
       <Name>CLASSRUN</Name>
       <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -382,137 +382,137 @@
       <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
       <State>Unprocessed</State>
       <Measures>
-        <Measure dwd:design-time-name="01a1f26b-532b-4ecd-bf15-cda740e24b02">
+        <Measure dwd:design-time-name="5e1ff5d9-1dbf-4fe2-bc12-b3ae44d17101">
           <ID>ID Class</ID>
           <Name>ID Class</Name>
-          <Source dwd:design-time-name="de3ab2b8-5886-470e-953b-3504474d08db">
+          <Source dwd:design-time-name="3bc25d2b-1464-4eea-8233-d2c05a48c13b">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="cc83e1a2-cd3e-45db-81ec-30c85838ccb1">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="36c98d57-d358-43c4-b673-ce5256e98880">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>ID_Class</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="271143f3-9db7-478c-8a32-a809111f39cc">
+        <Measure dwd:design-time-name="6a2b67b9-5e26-42f7-a895-eae5cc7041d0">
           <ID>Feedback</ID>
           <Name>Feedback</Name>
-          <Source dwd:design-time-name="d2825cf6-808a-4b83-a636-fa699e9b6fe9">
+          <Source dwd:design-time-name="36523e80-84f7-4e04-a125-c5fa720637ae">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="a17ff0e5-21fd-4396-9160-9603c90b5e04">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="7818cc21-ae5c-4298-bdee-c7afe0bd3f2f">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Feedback</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="edee3695-2166-41d2-94c2-60152a2c6554">
+        <Measure dwd:design-time-name="c4a6097e-8d2f-4664-a009-987cb2650802">
           <ID>Level</ID>
           <Name>Level</Name>
-          <Source dwd:design-time-name="f8ef5e64-e9e0-4b2f-a804-2add9dd24944">
+          <Source dwd:design-time-name="83d06112-b8b6-4c48-9e5a-cba3c7c5155c">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="20edf15a-470b-4569-8999-c4de173536f9">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="b3ad8aa1-4979-44d1-a90e-7a6c8ecdf6f5">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Level</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="510ea693-10f3-446f-b45c-441778472294">
+        <Measure dwd:design-time-name="452d1efc-a010-4ddf-87e5-2078694501ca">
           <ID>Duration</ID>
           <Name>Duration</Name>
-          <Source dwd:design-time-name="165c33e8-31d7-4997-8bfe-4ca182ba3a04">
+          <Source dwd:design-time-name="08feac56-c098-4f85-990b-b89dc0738f71">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="d1523cf1-4d83-4e18-a9ca-0e6621fed6e0">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="9ea2fc2e-719b-469b-bdf7-ec37995f3992">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Duration</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="1e4d23e5-7f06-44d6-9662-0d2c9d38f390">
+        <Measure dwd:design-time-name="150da524-57a3-481d-a6b9-c716a41d1816">
           <ID>CLASSRUN Count</ID>
           <Name>CLASSRUN Count</Name>
           <AggregateFunction>Count</AggregateFunction>
-          <Source dwd:design-time-name="626dd007-a4e0-4878-b072-30a4bb20d9b0">
+          <Source dwd:design-time-name="c862b07d-0cb1-40b1-afdc-4ddc242860c6">
             <DataType>Integer</DataType>
             <DataSize>4</DataSize>
-            <Source xsi:type="RowBinding" dwd:design-time-name="54958212-5f22-4458-8144-5fa5fc03d3db">
+            <Source xsi:type="RowBinding" dwd:design-time-name="0f7db55f-8d8b-4248-bb7e-1afb097bcbee">
               <TableID>dbo_CLASSRUN</TableID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="c831c57a-f4d8-4aca-8925-7117b1a4a4c6">
+        <Measure dwd:design-time-name="8b4f1eaf-9673-494b-ac3c-c90d0ac1a548">
           <ID>CLASSRUN Count 1</ID>
           <Name>Number of classes done</Name>
           <AggregateFunction>Count</AggregateFunction>
-          <Source dwd:design-time-name="96701f62-b20b-49d4-b007-83bba29f96f2">
+          <Source dwd:design-time-name="085187af-8151-4969-b703-bf8804d92d94">
             <DataType>Integer</DataType>
             <DataSize>4</DataSize>
-            <Source xsi:type="RowBinding" dwd:design-time-name="7402cf1e-6823-408d-be04-d9b8de80e940">
+            <Source xsi:type="RowBinding" dwd:design-time-name="b547373a-edf5-4bd9-a9eb-107187ab68cd">
               <TableID>dbo_CLASSRUN</TableID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="449d07f6-333a-4bb1-b824-bc855c521778">
+        <Measure dwd:design-time-name="6bd6494b-16aa-4633-87ef-94b0604bdaca">
           <ID>Level - CLASSRUN</ID>
           <Name>Sum of all classes levels</Name>
-          <Source dwd:design-time-name="4af54b08-ecc7-496c-8a59-62d1fd45721b">
+          <Source dwd:design-time-name="9f8f2dc7-1bb2-49be-b02b-88a2ac4749b4">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="e7c3e94a-3f0c-40c2-abed-90a3840df22b">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="54c72181-a4f3-4d68-8ef0-0206a3cb075e">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Level</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="cf5b118d-26b7-4b9d-b8f2-d56d33a068df">
+        <Measure dwd:design-time-name="8ca6fd6d-8171-45f2-a9fc-b79a4edfc591">
           <ID>CLASSRUN Count 2</ID>
           <Name>Number of classes levels</Name>
           <AggregateFunction>Count</AggregateFunction>
-          <Source dwd:design-time-name="948232e2-3921-43ce-a1a5-292aca68dbc0">
+          <Source dwd:design-time-name="be728398-4805-4e2b-8104-71e0315e5030">
             <DataType>Integer</DataType>
             <DataSize>4</DataSize>
-            <Source xsi:type="RowBinding" dwd:design-time-name="cd1f7a0f-6bc6-42c2-8770-f82a94ba58a7">
+            <Source xsi:type="RowBinding" dwd:design-time-name="a17fe20a-6c57-4da7-bf8e-499922ec9b7d">
               <TableID>dbo_CLASSRUN</TableID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="39416738-2b23-474d-908f-437def138ef0">
+        <Measure dwd:design-time-name="6a243153-efae-42bb-a6f0-2b6f240626dd">
           <ID>Feedback - CLASSRUN</ID>
           <Name>Sum of classes feedback</Name>
-          <Source dwd:design-time-name="4236ec8c-6367-4513-8821-03221ce35e39">
+          <Source dwd:design-time-name="0440e786-7554-4d90-b6f1-25ca4aaa336b">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="ee217e5a-36be-43e7-aef8-f18cf1c89507">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="f0c9d06b-0ab2-4262-933c-80143bc1f7ef">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Feedback</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="3f5cc7c5-2962-486e-b9b2-3555e792e6de">
+        <Measure dwd:design-time-name="14daa7bd-3a14-4d9c-965f-9a242eea9f16">
           <ID>CLASSRUN Count 3</ID>
           <Name>Number of classes feedbacks</Name>
           <AggregateFunction>Count</AggregateFunction>
-          <Source dwd:design-time-name="ef5fb88e-b9a2-45a6-961a-4fb16fa4c2fc">
+          <Source dwd:design-time-name="95136be1-d0ec-4190-bff6-e5314c49e98d">
             <DataType>Integer</DataType>
             <DataSize>4</DataSize>
-            <Source xsi:type="RowBinding" dwd:design-time-name="ad70fae2-d3f3-441d-98a7-e6fe182f0d0a">
+            <Source xsi:type="RowBinding" dwd:design-time-name="768d12c7-a1d1-49e7-81c3-01c6d8e4090e">
               <TableID>dbo_CLASSRUN</TableID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="92b8b31a-fce9-4591-b795-70f37ea0cc0f">
+        <Measure dwd:design-time-name="342c632e-5a08-4db4-9f88-794beee8d88a">
           <ID>Duration - CLASSRUN</ID>
           <Name>Sum of minutes of classes done</Name>
-          <Source dwd:design-time-name="ce0228d7-8cc8-47fa-9c70-4a64c57194c9">
+          <Source dwd:design-time-name="46be7815-5be3-460e-b5fa-3b2207ab5d56">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="609c6488-7e64-4106-91b0-41e65fbea34b">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="c609f5de-b773-4cad-8400-5db89b6ec0f5">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Duration</ColumnID>
             </Source>
           </Source>
         </Measure>
-        <Measure dwd:design-time-name="7dd76933-7fee-4659-ad43-3006883ab6fa">
+        <Measure dwd:design-time-name="462ee103-8794-413e-ab79-f11e4cedad60">
           <ID>Attendance</ID>
           <Name>Attendance on classes</Name>
-          <Source dwd:design-time-name="2893c487-a9e5-4242-8df7-a0e8ec36ee87">
+          <Source dwd:design-time-name="43d2330a-04b8-40b8-b2ed-6def33febfc9">
             <DataType>Integer</DataType>
-            <Source xsi:type="ColumnBinding" dwd:design-time-name="beba4ecf-71f0-41f1-9698-54fdc242e94e">
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="5488a369-d2c3-42f7-aee7-e90f1c81f509">
               <TableID>dbo_CLASSRUN</TableID>
               <ColumnID>Attendance</ColumnID>
             </Source>
@@ -522,15 +522,15 @@
       <StorageMode>Molap</StorageMode>
       <ProcessingMode>Regular</ProcessingMode>
       <Dimensions>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="e98a46b4-c846-46dc-a6dc-2a5f5defeb0d">
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="a41c9236-e9aa-456f-8ef3-53365c3c8e6a">
           <CubeDimensionID>OFFER</CubeDimensionID>
           <Attributes>
-            <Attribute dwd:design-time-name="9a4ba211-a3cc-45b6-bd70-9317c2df28d1">
+            <Attribute dwd:design-time-name="e7690d0b-96a3-4ff2-bb76-7c35870845fb">
               <AttributeID>ID Offer</AttributeID>
               <KeyColumns>
-                <KeyColumn dwd:design-time-name="c95893a3-237b-4995-a64e-c561ac708d4a">
+                <KeyColumn dwd:design-time-name="1d062667-3145-48ea-8e99-773ec831ab4c">
                   <DataType>Integer</DataType>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="fbd01cdd-2a2b-4122-9eb2-85cfee1b085d">
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="a5075a59-ef7b-4e6b-aa18-f326cb2e105f">
                     <TableID>dbo_CLASSRUN</TableID>
                     <ColumnID>ID_Offer</ColumnID>
                   </Source>
@@ -540,15 +540,15 @@
             </Attribute>
           </Attributes>
         </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="a869f820-4198-4ccd-8a51-fc6bd4c6265a">
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="3545aa33-fd26-40ec-bc79-2ae1b664682f">
           <CubeDimensionID>TIME</CubeDimensionID>
           <Attributes>
-            <Attribute dwd:design-time-name="cc3d8ec2-0415-41d4-bfe3-5c00b2225acc">
+            <Attribute dwd:design-time-name="6b31bbe1-c47b-46c4-9a6b-77411ea37657">
               <AttributeID>ID Time</AttributeID>
               <KeyColumns>
-                <KeyColumn dwd:design-time-name="655d953b-ebce-4421-b4d2-7e34fec5c40f">
+                <KeyColumn dwd:design-time-name="65820d2e-cf6c-4678-ad03-623c05c92cd5">
                   <DataType>Integer</DataType>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="b2295fcb-f626-49c7-9280-9a8299603acf">
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="ade773cd-07d2-4bfe-9c69-986d061b88c9">
                     <TableID>dbo_CLASSRUN</TableID>
                     <ColumnID>ID_Time</ColumnID>
                   </Source>
@@ -558,15 +558,15 @@
             </Attribute>
           </Attributes>
         </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="8037e8b4-4565-4273-a3d2-633f87b5669b">
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="8b5cbc89-c06c-4894-a3ab-792f1285677f">
           <CubeDimensionID>STUDENT</CubeDimensionID>
           <Attributes>
-            <Attribute dwd:design-time-name="fa65e0bf-6dff-485c-ab47-81041bd66d92">
+            <Attribute dwd:design-time-name="e847eeb3-7f11-49af-835b-13f89f4bd3bf">
               <AttributeID>ID Student</AttributeID>
               <KeyColumns>
-                <KeyColumn dwd:design-time-name="2dc1b3a4-a60e-4b91-a793-edf279e5ce64">
+                <KeyColumn dwd:design-time-name="607ebdc7-a655-4d27-9a5a-a4f27d8b6eeb">
                   <DataType>Integer</DataType>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="3569d997-1379-445d-b5b7-4e91c176e8aa">
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="ce47b71f-c0de-4b99-9204-041dff944e6e">
                     <TableID>dbo_CLASSRUN</TableID>
                     <ColumnID>ID_Student</ColumnID>
                   </Source>
@@ -576,15 +576,15 @@
             </Attribute>
           </Attributes>
         </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="b83e574d-14bf-4610-91a8-301faf608791">
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="54edee1f-79b9-456e-81c1-d2d1f82f96d0">
           <CubeDimensionID>DATE</CubeDimensionID>
           <Attributes>
-            <Attribute dwd:design-time-name="c2c97541-fd09-4b6c-860b-a456f4f8992f">
+            <Attribute dwd:design-time-name="1df068da-3a77-4027-8423-7f3aed2429e4">
               <AttributeID>ID Date</AttributeID>
               <KeyColumns>
-                <KeyColumn dwd:design-time-name="c6d75419-4c9d-4a98-9c3d-9953d717a793">
+                <KeyColumn dwd:design-time-name="07b1d3d8-c4da-44a6-a028-d611053f825e">
                   <DataType>Integer</DataType>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="92153b4d-12a2-4aa9-92c2-77a3a986d42f">
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c451732b-b3d1-453c-b739-c05caa402a2e">
                     <TableID>dbo_CLASSRUN</TableID>
                     <ColumnID>ID_Date</ColumnID>
                   </Source>
@@ -594,15 +594,15 @@
             </Attribute>
           </Attributes>
         </Dimension>
-        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="252537cc-49be-45d7-b0d6-c9c3464b54db">
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="fe944068-cd03-4738-bc2a-6f3495522887">
           <CubeDimensionID>TEACHER</CubeDimensionID>
           <Attributes>
-            <Attribute dwd:design-time-name="22248af8-9f50-423f-898c-e1ef504da95c">
+            <Attribute dwd:design-time-name="89762c6e-7bf8-4bb3-8400-a44ca096a7a4">
               <AttributeID>ID Teacher</AttributeID>
               <KeyColumns>
-                <KeyColumn dwd:design-time-name="34068da5-7e18-4bd6-8977-704a1f4da1fc">
+                <KeyColumn dwd:design-time-name="f329eb26-ac13-4634-8097-ef430f5df094">
                   <DataType>Integer</DataType>
-                  <Source xsi:type="ColumnBinding" dwd:design-time-name="a47d030a-6108-4e07-9bb4-a3b7c1b4d0fe">
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="dcbb07b3-11b9-44ac-9775-c5e83d7aaa4c">
                     <TableID>dbo_CLASSRUN</TableID>
                     <ColumnID>ID_Teacher</ColumnID>
                   </Source>
@@ -616,11 +616,11 @@
       <Partitions />
     </MeasureGroup>
   </MeasureGroups>
-  <Source dwd:design-time-name="51ddec96-73a7-4132-b486-a86d89ebbcd9">
+  <Source dwd:design-time-name="4732321d-ad48-42ef-9290-1d8bf324eae1">
     <DataSourceViewID>Warehouse</DataSourceViewID>
   </Source>
   <MdxScripts>
-    <MdxScript dwd:design-time-name="3a0a4c08-e423-42fa-8b7f-7f8fb6849d8b">
+    <MdxScript dwd:design-time-name="91634b09-7fc4-4210-af12-4e218dbe1a28">
       <ID>MdxScript</ID>
       <Name>MdxScript</Name>
       <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -633,12 +633,15 @@ If the CALCULATE command is deleted or modified, the data within the cube is aff
 You should edit this command only if you manually specify how the cube is aggregated.
 */
 CALCULATE; 
+CREATE MEMBER CURRENTCUBE.[Measures].[Attendance on classes pos]
+ AS [Attendance on classes]*-1, 
+VISIBLE = 1 ,  ASSOCIATED_MEASURE_GROUP = 'CLASSRUN'  ;        
 CREATE MEMBER CURRENTCUBE.[Measures].[Average class level]
  AS [Sum of all classes levels]/[Number of classes levels], 
-VISIBLE = 1 ,  ASSOCIATED_MEASURE_GROUP = 'CLASSRUN'  ; 
+VISIBLE = 1 ,  ASSOCIATED_MEASURE_GROUP = 'CLASSRUN';        
 CREATE MEMBER CURRENTCUBE.[Measures].[Average satisfaction level]
  AS [Sum of classes feedback]/[Number of classes feedbacks], 
-VISIBLE = 1 ,  ASSOCIATED_MEASURE_GROUP = 'CLASSRUN'  ; </Text>
+VISIBLE = 1 ,  ASSOCIATED_MEASURE_GROUP = 'CLASSRUN'; </Text>
         </Command>
       </Commands>
     </MdxScript>

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/9/2024 4:05:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HOME"
+  DTS:CreatorName="HOME\User"
+  DTS:DTSID="{4D68853E-CFCD-4042-B899-601901AAE832}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1045"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{00C53342-F55E-4A1F-A869-F37EB5BE73A6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ETL_creating auxiliary tables.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{4B38D76A-9A83-4083-9E0B-4EC8FC77DF02}"
+      DTS:ObjectName="ETL_creating auxiliary tables.sql">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\User\source\repos\hurtownie-danych\ETL_PROCESS\ETL\ETL_creating auxiliary tables.sql" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create auxiliary tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a41aca38-32a1-49bc-9d1c-b471531893d3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create auxiliary tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FA809D6D-8754-4C45-BBE9-6B7DAF3236CB}"
+          SQLTask:SqlStmtSourceType="FileConnection"
+          SQLTask:SqlStatementSource="ETL_creating auxiliary tables.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Auxiliary tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{c2aae045-f22f-4b39-9af1-415f5ea68177}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Auxiliary tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FA809D6D-8754-4C45-BBE9-6B7DAF3236CB}"
+          SQLTask:SqlStatementSource="USE auxiliary;&#xA;DROP TABLE swieta;&#xA;DROP TABLE wakacje;&#xA;&#xA;USE master;&#xA;&#xA;DROP DATABASE auxiliary;&#xA;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{dba9b9f7-1027-4f8f-b785-bdb4f123ba24}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="use Warehouse&#xA;go&#xA;&#xA;-- Fill [DATE]s Lookup Table&#xA;-- Step a: Declare variables use in processing&#xA;Declare @StartDate date; &#xA;Declare @EndDate date;&#xA;&#xA;-- Step b:  Fill the variable with values for the range of years needed&#xA;SELECT @StartDate = '2000-01-01', @EndDate = '2020-12-12';&#xA;&#xA;-- Step c:  Use a while loop to add dates to the table&#xA;Declare @DateInProcess datetime = @StartDate;&#xA;&#xA;While @DateInProcess &lt;= @EndDate&#xA; Begin&#xA; --Add a row into the date dimension table for this date&#xA;  Insert Into [dbo].[DATE] &#xA;  ( [Date]&#xA;  , [Year]&#xA;  , [Month]&#xA;  , [MonthNo]&#xA;  , [DayOfWeek]&#xA;  , [DayOfWeekNo]&#xA;  , [WorkingDay]&#xA;  , [Vacation]&#xA;  , [Holiday]&#xA;  , [BeforeHolidayDay]&#xA;  )&#xA;  Values ( &#xA;    @DateInProcess -- [Date]&#xA;    , Cast( Year(@DateInProcess) as varchar(4)) -- [Year]&#xA;    , Cast( DATENAME(month, @DateInProcess) as varchar(10)) -- [Month]&#xA;    , Cast( Month(@DateInProcess) as int) -- [MonthNo]&#xA;    , Cast( DATENAME(dw,@DateInProcess) as varchar(15)) -- [DayOfWeek]&#xA;    , Cast( DATEPART(dw, @DateInProcess) as int) -- [DayOfWeekNo]&#xA;    , CASE&#xA;    WHEN DATEPART(dw, @DateInProcess) = 1 THEN 'day off'&#xA;    ELSE 'working day'&#xA;   END&#xA;    , 'non-vacation' -- will be put in te next steps&#xA;    , 'non-holiday'  -- will be put in te next steps&#xA;    , 'non-holiday day tomorrow'  -- will be put in te next steps&#xA;  );  &#xA;  -- Add a day and loop again&#xA;  Set @DateInProcess = DateAdd(d, 1, @DateInProcess);&#xA; End&#xA;go&#xA;&#xA;&#xA;-- insert into holidays and vacations&#xA;-------------------------------------------------------------&#xA;&#xA;-- auxiliary tables should be created first!&#xA;&#xA;&#xA;If (object_id('vETLDATEsData') is not null) Drop View vETLDATEsData;&#xA;go&#xA;&#xA;CREATE VIEW vETLDATEsData&#xA;AS&#xA;SELECT &#xA; dd.ID_Date&#xA; , dd.Date&#xA; , dd.Year&#xA; , dd.Month,&#xA; dd.MonthNo&#xA; , dd.DayOfWeek&#xA; , dd.DayOfWeekNo&#xA; , CASE &#xA;  WHEN ah1.wolne = 1 THEN 'day off'&#xA;  WHEN dd.WorkingDay = 'day off' THEN 'day off'&#xA;  ELSE 'working day'&#xA;   END AS [WorkingDay]&#xA; , CASE&#xA;  WHEN w.rodzaj is not null THEN w.rodzaj&#xA;  ELSE 'no vacation'&#xA; END AS [Vacation]&#xA; , CASE &#xA;  WHEN ah1.swieto is not null THEN ah1.swieto&#xA;  ELSE 'non-holiday'&#xA;   END AS [Holiday]&#xA; , CASE &#xA;  WHEN ah2.BeforeHolidayDay is not null THEN ah2.BeforeHolidayDay&#xA;  ELSE 'Brak'&#xA;   END AS [BeforeHolidayDay]&#xA;&#xA;FROM auxiliary.dbo.swieta ah1&#xA;right JOIN [DATE] as dd ON dd.Date = ah1.data&#xA;left JOIN (SELECT DATEADD(&quot;dd&quot;, -1, data) as d, 'Jutro ' + swieto as BeforeHolidayDay FROM auxiliary.dbo.swieta) as ah2 ON dd.Date = ah2.d&#xA;left JOIN auxiliary.dbo.wakacje as w ON dd.Date BETWEEN w.start AND w.koniec;&#xA;go&#xA;&#xA;-- Merge view with updated information about holidays and before holiday days with already existing [DATE] rows&#xA;&#xA;MERGE INTO [DATE] as TT&#xA; USING vETLDatesData as ST&#xA;  ON TT.date = ST.date&#xA;   WHEN Matched -- when dates match...&#xA;   THEN -- update WorkingDay, Holiday and BeforeHolidayDay columns&#xA;    UPDATE&#xA;    SET TT.WorkingDay = ST.WorkingDay,&#xA;     TT.Vacation = ST.Vacation,&#xA;     TT.Holiday = ST.Holiday,&#xA;     TT.BeforeHolidayDay = ST.BeforeHolidayDay&#xA;   ;&#xA;&#xA;-- SELECT * from [DATE];&#xA;&#xA;Drop View vETLDATEsData;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Holidays"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{43e3eb7b-1269-43c1-9720-5dbbb013d599}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Holidays"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FA809D6D-8754-4C45-BBE9-6B7DAF3236CB}"
+          SQLTask:SqlStatementSource="USE auxiliary;&#xA;&#xA;&#xA;-- 2000&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2000-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2001&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2001-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2002&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2002-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2003&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2003-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2004&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2004-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2005&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2005-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2006&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2006-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2007&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2007-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2008&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2008-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2009&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2009-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2010&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2010-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2011&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2011-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2012&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2012-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2013&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2013-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2014&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2014-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2015&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2015-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2016&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2016-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2017&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2017-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2018&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2018-02-14', 'walentynki', 0);&#xA;&#xA;&#xA;-- 2019&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-12-25', 'boze narodzenie', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-01-21', 'dzien babci', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-01-22', 'dzien dziadka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-12-24', 'wigilia', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-05-26', 'dzien mamy', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-06-01', 'dzien dziecka', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-06-23', 'dzien taty', 0);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-01-01', 'nowy rok', 1);&#xA;insert into dbo.swieta (&quot;data&quot;, &quot;swieto&quot;, &quot;wolne&quot;) values ('2019-02-14', 'walentynki', 0);&#xA;&#xA;GO&#xA;USE master;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load time"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{dfc21145-525f-4202-a05a-e8b77a1edd7e}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load time"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="use Warehouse&#xA;go&#xA;&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (0, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (1, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (2, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (3, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (4, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (5, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (6, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (7, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (8, 'od 0 do 8');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (9, 'od 9 do 12');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (10, 'od 9 do 12');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (11, 'od 9 do 12');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (12, 'od 9 do 12');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (13, 'od 13 do 15');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (14, 'od 13 do 15');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (15, 'od 13 do 15');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (16, 'od 16 do 20');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (17, 'od 16 do 20');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (18, 'od 16 do 20');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (19, 'od 16 do 20');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (20, 'od 16 do 20');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (21, 'od 21 do 23');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (22, 'od 21 do 23');&#xA;insert into dbo.Time(&quot;Hour&quot;, &quot;TimeOfDay&quot;) values (23, 'od 21 do 23');&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load vacations"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0cd3ed11-e729-4d47-8d62-b9bb1b9990d6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load vacations"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FA809D6D-8754-4C45-BBE9-6B7DAF3236CB}"
+          SQLTask:SqlStatementSource="USE auxiliary;&#xA;&#xA;-- 2000&#xA;INSERT INTO dbo.wakacje VALUES('2000-01-21','2000-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2000-06-27','2000-08-31','Letnie wakacje');&#xA;&#xA;-- 2001&#xA;INSERT INTO dbo.wakacje VALUES('2001-01-21','2001-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2001-06-27','2001-08-31','Letnie wakacje');&#xA;&#xA;-- 2002&#xA;INSERT INTO dbo.wakacje VALUES('2002-01-21','2002-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2002-06-27','2002-08-31','Letnie wakacje');&#xA;&#xA;-- 2003&#xA;INSERT INTO dbo.wakacje VALUES('2003-01-21','2003-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2003-06-27','2003-08-31','Letnie wakacje');&#xA;&#xA;-- 2004&#xA;INSERT INTO dbo.wakacje VALUES('2004-01-21','2004-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2004-06-27','2004-08-31','Letnie wakacje');&#xA;&#xA;-- 2005&#xA;INSERT INTO dbo.wakacje VALUES('2005-01-21','2005-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2005-06-27','2005-08-31','Letnie wakacje');&#xA;&#xA;-- 2006&#xA;INSERT INTO dbo.wakacje VALUES('2006-01-21','2006-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2006-06-27','2006-08-31','Letnie wakacje');&#xA;&#xA;-- 2007&#xA;INSERT INTO dbo.wakacje VALUES('2007-01-21','2007-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2007-06-27','2007-08-31','Letnie wakacje');&#xA;&#xA;-- 2008&#xA;INSERT INTO dbo.wakacje VALUES('2008-01-21','2008-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2008-06-27','2008-08-31','Letnie wakacje');&#xA;&#xA;-- 2009&#xA;INSERT INTO dbo.wakacje VALUES('2009-01-21','2009-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2009-06-27','2009-08-31','Letnie wakacje');&#xA;&#xA;-- 2010&#xA;INSERT INTO dbo.wakacje VALUES('2010-01-21','2010-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2010-06-27','2010-08-31','Letnie wakacje');&#xA;&#xA;-- 2011&#xA;INSERT INTO dbo.wakacje VALUES('2011-01-21','2011-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2011-06-27','2011-08-31','Letnie wakacje');&#xA;&#xA;-- 2012&#xA;INSERT INTO dbo.wakacje VALUES('2012-01-21','2012-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2012-06-27','2012-08-31','Letnie wakacje');&#xA;&#xA;-- 2013&#xA;INSERT INTO dbo.wakacje VALUES('2013-01-21','2013-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2013-06-27','2013-08-31','Letnie wakacje');&#xA;&#xA;-- 2014&#xA;INSERT INTO dbo.wakacje VALUES('2014-01-21','2014-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2014-06-27','2014-08-31','Letnie wakacje');&#xA;&#xA;-- 2015&#xA;INSERT INTO dbo.wakacje VALUES('2015-01-21','2015-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2015-06-27','2015-08-31','Letnie wakacje');&#xA;&#xA;-- 2016&#xA;INSERT INTO dbo.wakacje VALUES('2016-01-21','2016-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2016-06-27','2016-08-31','Letnie wakacje');&#xA;&#xA;-- 2017&#xA;INSERT INTO dbo.wakacje VALUES('2017-01-21','2017-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2017-06-27','2017-08-31','Letnie wakacje');&#xA;&#xA;-- 2018&#xA;INSERT INTO dbo.wakacje VALUES('2018-01-21','2018-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2018-06-27','2018-08-31','Letnie wakacje');&#xA;&#xA;-- 2019&#xA;INSERT INTO dbo.wakacje VALUES('2019-01-21','2019-02-24','Ferie zimowe');&#xA;INSERT INTO dbo.wakacje VALUES('2019-06-27','2019-08-31','Letnie wakacje');&#xA;&#xA;GO&#xA;USE master;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{e23707f5-a965-4aa7-8fa4-5ec7e3cd8124}"
+      DTS:From="Package\Create auxiliary tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load vacations" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{5b78c772-bf5b-4a00-8b8b-c80d9e9265b0}"
+      DTS:From="Package\Load vacations"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Holidays" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{53df968b-29b5-4aca-ad5d-e5a0539a045d}"
+      DTS:From="Package\Load Holidays"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{39c90b99-4931-4a90-aa06-16cd5787ea05}"
+      DTS:From="Package\Load date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Drop Auxiliary tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{4d84903f-3561-4514-9ef2-e59f20a4d381}"
+      DTS:From="Package\Drop Auxiliary tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Load time" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Create auxiliary tables"
+          TopLeft="66,60" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Drop Auxiliary tables"
+          TopLeft="60,324" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Load date"
+          TopLeft="476,224" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Load Holidays"
+          TopLeft="82,222" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load time"
+          TopLeft="457,399" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Load vacations"
+          TopLeft="81.5,138.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="156.75,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.5"
+              Start="0,0"
+              End="0,29">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="155,180.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5"
+              Start="0,0"
+              End="0,34">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="226,244">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="250,0"
+              Start="0,0"
+              End="242.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="242.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="539,266">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-391,58"
+              Start="0,0"
+              End="-391,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="-4,29" />
+                  <mssgle:LineSegment
+                    End="-387,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-387,29"
+                    Point2="-391,29"
+                    Point3="-391,33" />
+                  <mssgle:LineSegment
+                    End="-391,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="148,366">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="390.5,33"
+              Start="0,0"
+              End="390.5,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5"
+                    Point2="0,16.5"
+                    Point3="4,16.5" />
+                  <mssgle:LineSegment
+                    End="386.5,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="386.5,16.5"
+                    Point2="390.5,16.5"
+                    Point3="390.5,20.5" />
+                  <mssgle:LineSegment
+                    End="390.5,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
