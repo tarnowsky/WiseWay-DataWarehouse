@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#Zip files
+
+*.zip
+
+.vs/
+ETL_PROCESS/SSIS/ETL_DataWarehouse/bin
+
 # C extensions
 *.so
 

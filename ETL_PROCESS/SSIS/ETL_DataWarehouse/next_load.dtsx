@@ -1,0 +1,318 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/8/2024 11:06:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HOME"
+  DTS:CreatorName="HOME\User"
+  DTS:DTSID="{8160FC8B-60CB-4C47-97F6-4674049BE597}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1045"
+  DTS:ObjectName="load_to_warehouse"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{921AF26A-7ECE-4051-937D-D2B555067B11}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ETL_load_students.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{3E85A71A-EDB2-4AAE-8145-8DE11E3FD8B2}"
+      DTS:ObjectName="ETL_load_students.sql">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\User\source\repos\hurtownie-danych\ETL_PROCESS\ETL\ETL_load_students.sql" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost]"
+      DTS:CreationName="MSOLAP100"
+      DTS:DTSID="{96DDCB1A-7EDD-462C-97C8-6ABBD9D0BBCE}"
+      DTS:ObjectName="localhost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Data Source=localhost;User ID=User;Provider=MSOLAP.8;Persist Security Info=False;Impersonation Level=Impersonate;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiEvcC5+kLkCgvaFR/ruywgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAArANRBhTfm6N65XyfkFSjARxZlVHEbtREBlh4frh+PTwAAAAAOgAAAAAIAACAAAADA4TKK0J2cHK5TE4Ur4uppchK9moksy0y357XvQM6iFSAAAABQYXeG+cCRLWIO/Xr2qTbn+lcBRZPr4agonJzFtXAyAEAAAACwue6zY0zkzevBRGDAtYD0Fsk+JQNW6sWntV0H/oFGYUTabeHI52CwPpmGb/zqPiZm+teVHImZtVMDSXqIdHib</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.WiseWarehouse]"
+      DTS:CreationName="MSOLAP100"
+      DTS:DTSID="{BD71E47E-F96F-482D-B65E-65E87C965289}"
+      DTS:ObjectName="localhost.WiseWarehouse">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Data Source=localhost;User ID=User;Initial Catalog=WiseWarehouse;Provider=MSOLAP.8;Persist Security Info=True;Impersonation Level=Impersonate;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiEvcC5+kLkCgvaFR/ruywgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACqoATmR8D14j1bFoJjXSf6HRy0HwnBYHT6NtBSxAz6hwAAAAAOgAAAAAIAACAAAADNhXIyu2v4cloX4UK4eg722kvsfVr/Yko4YVUmaXn+aCAAAACB33Enq20kp+HcWimxhghicCCvIE4OtARgQ5LuqJiY30AAAAAcM6FTeubdhjwm4HlS+uDNQDlSrcOLok3DDcYt9TXBeVusvKv1Pn2w/Ga3pZFW8sMO6D6+0SkvhkqH8bmY9HqO</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Analysis Services Processing Task"
+      DTS:CreationName="Microsoft.DTSProcessingTask"
+      DTS:Description="Analysis Services Processing Task"
+      DTS:DTSID="{7F04974D-15F6-4EA0-87B8-6CE8F99D7265}"
+      DTS:ExecutableType="Microsoft.DTSProcessingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Analysis Services Processing Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASProcessingData
+          ConnectionName="localhost.WiseWarehouse"
+          ProcessingCommands="&lt;Batch xmlns=&quot;http://schemas.microsoft.com/analysisservices/2003/engine&quot;&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;DimensionID&gt;TEACHER&lt;/DimensionID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessUpdate&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;CubeID&gt;Warehouse&lt;/CubeID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessFull&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;DimensionID&gt;OFFER&lt;/DimensionID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessUpdate&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;DimensionID&gt;STUDENT&lt;/DimensionID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessUpdate&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;DimensionID&gt;TIME&lt;/DimensionID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessUpdate&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;WiseWarehouse&lt;/DatabaseID&gt;&#xA;      &lt;DimensionID&gt;DATE&lt;/DimensionID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessUpdate&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;&lt;/Batch&gt;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load ClassRun"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{28C94581-BCCB-42A1-A0D1-F448986B2C49}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load ClassRun"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="USE Warehouse;&#xA;GO&#xA;&#xA;-- Usunięcie istniejącego widoku, jeśli istnieje&#xA;IF (OBJECT_ID('dbo.vETLClassRun') IS NOT NULL) DROP VIEW dbo.vETLClassRun;&#xA;GO&#xA;&#xA;-- Tworzenie widoku z eliminacją duplikatów&#xA;CREATE VIEW dbo.vETLClassRun AS&#xA;WITH CTE_ClassRun AS (&#xA;    SELECT DISTINCT&#xA;        CD.ID_Date,                               -- Data klasy&#xA;        T.ID_Time,                                -- Czas (godzina)&#xA;        CO.teacher_id AS ID_Teacher,              -- Nauczyciel&#xA;        WC.student_id AS ID_Student,              -- Student&#xA;        CO.offer_id AS ID_Offer,                  -- Oferta&#xA;        WC.class_id AS ID_Class,                  -- Klasa&#xA;        ISNULL(FB.feedback, 0) AS Feedback,       -- Domyślny feedback 0&#xA;        CASE &#xA;            WHEN ATD.present = 1 THEN 1 &#xA;            ELSE 0 &#xA;        END AS Attendance,                        -- Obecność jako BIT&#xA;        CO.[level] AS [Level],                    -- Poziom klasy&#xA;        CO.duration AS Duration,                  -- Czas trwania klasy&#xA;        ROW_NUMBER() OVER (                       -- Generowanie unikalnego wiersza&#xA;            PARTITION BY WC.student_id, CD.ID_Date, T.ID_Time &#xA;            ORDER BY CO.offer_id&#xA;        ) AS RowNum&#xA;    FROM dbo.[DATE] AS CD&#xA;    JOIN WiseDB.dbo.[class] AS WC&#xA;        ON CAST(CD.Date AS DATE) = CAST(WC.[date] AS DATE)  &#xA;    JOIN WiseDB.dbo.[offer] AS CO&#xA;        ON WC.offer_id = CO.offer_id&#xA;    LEFT JOIN (&#xA;        SELECT &#xA;            class_id, &#xA;            MAX(CAST(present AS INT)) AS present  -- Konwersja BIT na INT&#xA;        FROM WiseDB.dbo.[attendance]&#xA;        GROUP BY class_id&#xA;    ) AS ATD&#xA;        ON WC.class_id = ATD.class_id&#xA;    LEFT JOIN (&#xA;        SELECT &#xA;            class_id, &#xA;            MAX(feedback) AS feedback             -- Feedback jest już w odpowiednim typie&#xA;        FROM WiseDB.dbo.[feedback]&#xA;        GROUP BY class_id&#xA;    ) AS FB&#xA;        ON WC.class_id = FB.class_id&#xA;    JOIN dbo.[TIME] AS T&#xA;        ON T.Hour = DATEPART(HOUR, WC.[date])&#xA;)&#xA;SELECT &#xA;    ID_Date,&#xA;    ID_Time,&#xA;    ID_Teacher,&#xA;    ID_Student,&#xA;    ID_Offer,&#xA;    ID_Class,&#xA;    Feedback,&#xA;    Attendance,&#xA;    [Level],&#xA;    Duration&#xA;FROM CTE_ClassRun&#xA;WHERE RowNum = 1; -- Wyeliminowanie duplikatów&#xA;GO&#xA;&#xA;-- MERGE do tabeli CLASSRUN&#xA;MERGE INTO CLASSRUN AS TT&#xA;USING dbo.vETLClassRun AS ST&#xA;    ON TT.ID_Date = ST.ID_Date                                       -- Łączenie po dacie&#xA;    AND TT.ID_Time = ST.ID_Time                                      -- Łączenie po czasie&#xA;    AND TT.ID_Teacher = ST.ID_Teacher                                -- Łączenie po nauczycielu&#xA;    AND TT.ID_Student = ST.ID_Student                                -- Łączenie po uczniu&#xA;    AND TT.ID_Offer = ST.ID_Offer                                    -- Łączenie po ofercie&#xA;    AND TT.ID_Class = ST.ID_Class                                    -- Łączenie po klasie&#xA;    AND TT.Feedback = ST.Feedback                                    -- Łączenie po feedbacku&#xA;    AND TT.Attendance = ST.Attendance                                -- Łączenie po obecności&#xA;WHEN NOT MATCHED THEN&#xA;    INSERT (&#xA;        ID_Date,&#xA;        ID_Time,&#xA;        ID_Teacher,&#xA;        ID_Student,&#xA;        ID_Offer,&#xA;        ID_Class,&#xA;        Feedback,&#xA;        Attendance,&#xA;        [Level],&#xA;        Duration&#xA;    )&#xA;    VALUES (&#xA;        ST.ID_Date,&#xA;        ST.ID_Time,&#xA;        ST.ID_Teacher,&#xA;        ST.ID_Student,&#xA;        ST.ID_Offer,&#xA;        ST.ID_Class,&#xA;        ST.Feedback,&#xA;        ST.Attendance,&#xA;        ST.[Level],&#xA;        ST.Duration&#xA;    )&#xA;WHEN NOT MATCHED BY SOURCE THEN&#xA;    DELETE;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load offers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{60399DAF-DF62-46B4-BA64-47559C523F59}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load offers"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="USE Warehouse;&#xA;GO&#xA;&#xA;-- Drop view if exists&#xA;IF (OBJECT_ID('vETLDimOffer') IS NOT NULL)&#xA;    DROP VIEW vETLDimOffer;&#xA;GO&#xA;&#xA;-- Create a view to transform data&#xA;CREATE VIEW vETLDimOffer AS&#xA;SELECT&#xA;    s.[name] AS [Subject],&#xA;    CASE&#xA;        WHEN o.[level] = 1 THEN 'podstawowy / a'&#xA;        WHEN o.[level] = 2 THEN 'sredni / b'&#xA;        ELSE 'zaawansowany / c'&#xA;    END AS [LevelCategory],&#xA;    CASE&#xA;        WHEN o.duration &gt;= 30 AND o.duration &lt;= 60 THEN 'od 30 minut do 1 godziny'&#xA;        WHEN o.duration &gt; 60 AND o.duration &lt;= 90 THEN 'od 1 godziny do 1,5 godziny'&#xA;        ELSE 'od 1,5 godziny'&#xA;    END AS [DurationCategory]&#xA;FROM [WiseDB].dbo.[offer] AS o&#xA;JOIN [WiseDB].dbo.[subject] AS s&#xA;    ON o.subject_id = s.subject_id;&#xA;GO&#xA;&#xA;-- Merge data into Warehouse.OFFER table&#xA;MERGE INTO OFFER AS TT&#xA;USING vETLDimOffer AS ST&#xA;ON TT.[Subject] = ST.[Subject]&#xA;   AND TT.[LevelCategory] = ST.[LevelCategory]&#xA;   AND TT.[DurationCategory] = ST.[DurationCategory]&#xA;WHEN NOT MATCHED THEN&#xA;    INSERT ([Subject], [LevelCategory], [DurationCategory])&#xA;    VALUES (ST.[Subject], ST.[LevelCategory], ST.[DurationCategory]);&#xA;&#xA;-- Clean up by dropping the view&#xA;DROP VIEW vETLDimOffer;&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load students"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{64C228CE-95D7-4429-BA26-7F5F346F05EA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load students"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStmtSourceType="FileConnection"
+          SQLTask:SqlStatementSource="ETL_load_students.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load teachers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9D92AC64-599C-4AA0-B1BF-AC0D5CDD9C6F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load teachers"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="use Warehouse&#xA;GO&#xA;&#xA;-- Create the teachersTemp table&#xA;If (object_id('dbo.teachersTemp') is not null) drop table dbo.teachersTemp;&#xA;CREATE TABLE dbo.teachersTemp (&#xA;    ID_Teacher INT,&#xA;    Name VARCHAR(25),&#xA;    Surname VARCHAR(25),&#xA;    Age INT,&#xA;    Email VARCHAR(50),&#xA;    Phone INT,&#xA;    HireDate DATE,&#xA;    Salary INT,&#xA;    BankAccount VARCHAR(50),&#xA;    Education VARCHAR(50),&#xA;    WorkExperience INT,&#xA;    PESEL VARCHAR(11)&#xA;);&#xA;go&#xA;&#xA;-- bulk insert data from the csv file&#xA;BULK INSERT dbo.teachersTemp&#xA;    FROM 'C:\Users\User\source\repos\hurtownie-danych\ETL_PROCESS\sources\teacher.csv'&#xA;    WITH (&#xA;        FIELDTERMINATOR = ',',&#xA;        ROWTERMINATOR = '\n',&#xA;        TABLOCK&#xA;    );&#xA;go&#xA;&#xA;&#xA;CREATE VIEW vDimTeachersData&#xA;AS&#xA;SELECT DISTINCT&#xA;    [Name] + ' ' + [Surname] AS [NameAndSurname],&#xA;    [PESEL],&#xA;    CASE&#xA;        WHEN [Age] &gt;= 18 AND [Age] &lt;= 29 THEN 'od 18 do 29'&#xA;        WHEN [Age] &gt;= 30 AND [Age] &lt;= 39 THEN 'od 30 do 39'&#xA;        WHEN [Age] &gt;= 40 AND [Age] &lt;= 49 THEN 'od 40 do 49'&#xA;        WHEN [Age] &gt;= 50 AND [Age] &lt;= 59 THEN 'od 50 do 59'&#xA;        ELSE 'od 60'&#xA;    END AS [AgeCategory],&#xA;    [Education],&#xA;    CASE&#xA;        WHEN [WorkExperience] &lt;= 1 THEN 'rok i mniej'&#xA;        WHEN [WorkExperience] &gt; 1 AND [WorkExperience] &lt;= 5 THEN 'miedzy dwa, a piec lat'&#xA;        ELSE 'wiecej niz piec lat'&#xA;    END AS [WorkExperience]&#xA;FROM dbo.teachersTemp&#xA;go&#xA;&#xA;MERGE INTO TEACHER AS TT&#xA;    USING vDimTeachersData AS ST&#xA;        ON TT.NameAndSurname = ST.NameAndSurname&#xA;        AND TT.PESEL = ST.PESEL&#xA;        AND TT.AgeCategory = ST.AgeCategory&#xA;        AND TT.Education = ST.Education&#xA;        AND TT.WorkExperience = ST.WorkExperience&#xA;            WHEN NOT Matched&#xA;                THEN&#xA;                    INSERT&#xA;                    VALUES (&#xA;                        ST.AgeCategory,&#xA;                        ST.PESEL,&#xA;                        ST.NameAndSurname,&#xA;                        ST.Education,&#xA;                        ST.WorkExperience,&#xA;                        1&#xA;                    )&#xA;            WHEN NOT Matched BY Source&#xA;                THEN&#xA;                    DELETE&#xA;            ;&#xA;&#xA;Drop table dbo.teachersTemp;&#xA;DROP VIEW vDimTeachersData;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5DCB66A7-A492-4A48-9265-9F7E623F7D6E}"
+      DTS:From="Package\Load ClassRun"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Analysis Services Processing Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{242451F1-CCA1-4136-887E-3C4EDA7E70FD}"
+      DTS:From="Package\Load teachers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Load students" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{9703271C-4E2B-44E9-A206-A9B628292981}"
+      DTS:From="Package\Load students"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Load offers" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{90197EE3-BFEB-485A-A0D5-6E713092B8C7}"
+      DTS:From="Package\Load offers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Load ClassRun" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Load teachers"
+          TopLeft="746.75,124.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load students"
+          TopLeft="736.75,201.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="818.75,166.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Load offers"
+          TopLeft="755,295" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="819.625,243.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.5"
+              Start="0,0"
+              End="0,44">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load ClassRun"
+          TopLeft="738.75,392.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="820.625,337">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.5"
+              Start="0,0"
+              End="0,48">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Analysis Services Processing Task"
+          TopLeft="707.5,518.75" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="823.125,434.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,84.25"
+              Start="0,0"
+              End="0,76.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[localhost]">
+    <ProjectReferenceName></ProjectReferenceName>
+  </ConnectionManager>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[localhost.WiseWarehouse]">
+    <ProjectReferenceName></ProjectReferenceName>
+  </ConnectionManager>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

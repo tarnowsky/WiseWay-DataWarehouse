@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/8/2024 11:20:30 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HOME"
+  DTS:CreatorName="HOME\User"
+  DTS:DTSID="{E37AAB97-2B54-4D39-8A77-3A0C90762433}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1045"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{A6651349-4238-4068-B0A9-AC1A06411458}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[create_tables.sql]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{D1E637EB-3F0A-4CBF-A213-37F6C9E71F4A}"
+      DTS:ObjectName="create_tables.sql">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\User\source\repos\hurtownie-danych\ETL_PROCESS\WAREHOUSE\create_tables.sql" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create tables in warehouse"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{34D553DC-8424-4D11-AAA1-50D66A303384}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create tables in warehouse"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStmtSourceType="FileConnection"
+          SQLTask:SqlStatementSource="create_tables.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop warehouse tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{22D0877F-19F2-48CA-812F-9FE14C1A6C3C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop warehouse tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{A9E19364-AA3B-4DE6-A003-6BDA3563A29E}"
+          SQLTask:SqlStatementSource="-- Wyłączenie sprawdzania kluczy obcych&#xA;ALTER TABLE CLASSRUN NOCHECK CONSTRAINT ALL;&#xA;ALTER TABLE OFFER NOCHECK CONSTRAINT ALL;&#xA;ALTER TABLE STUDENT NOCHECK CONSTRAINT ALL;&#xA;ALTER TABLE TEACHER NOCHECK CONSTRAINT ALL;&#xA;ALTER TABLE TIME NOCHECK CONSTRAINT ALL;&#xA;ALTER TABLE DATE NOCHECK CONSTRAINT ALL;&#xA;&#xA;-- Usuwanie danych&#xA;DELETE FROM CLASSRUN;&#xA;DELETE FROM OFFER;&#xA;DELETE FROM STUDENT;&#xA;DELETE FROM TEACHER;&#xA;DELETE FROM TIME;&#xA;DELETE FROM DATE;&#xA;&#xA;-- Ponowne włączenie sprawdzania kluczy obcych&#xA;ALTER TABLE CLASSRUN CHECK CONSTRAINT ALL;&#xA;ALTER TABLE OFFER CHECK CONSTRAINT ALL;&#xA;ALTER TABLE STUDENT CHECK CONSTRAINT ALL;&#xA;ALTER TABLE TEACHER CHECK CONSTRAINT ALL;&#xA;ALTER TABLE TIME CHECK CONSTRAINT ALL;&#xA;ALTER TABLE DATE CHECK CONSTRAINT ALL;&#xA;&#xA;-- Usuwanie tabel&#xA;DROP TABLE IF EXISTS CLASSRUN;&#xA;DROP TABLE IF EXISTS OFFER;&#xA;DROP TABLE IF EXISTS STUDENT;&#xA;DROP TABLE IF EXISTS TEACHER;&#xA;DROP TABLE IF EXISTS TIME;&#xA;DROP TABLE IF EXISTS DATE;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A0E1D0AD-0F8A-4725-BF9B-7407BA835260}"
+      DTS:From="Package\Drop warehouse tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Create tables in warehouse" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Create tables in warehouse"
+          TopLeft="442.5,240.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Drop warehouse tables"
+          TopLeft="439,115" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="522.25,157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83.5"
+              Start="0,0"
+              End="0,76">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
