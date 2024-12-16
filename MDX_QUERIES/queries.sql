@@ -1,0 +1,29 @@
+-- 1. Analiza sezonowej frekwencji na zajęciach podzielona na przedmioty:
+SELECT NON EMPTY { [Measures].[Attendance on classes pos] } ON COLUMNS, NON EMPTY { ([DATE].[Vacation].[Vacation].ALLMEMBERS * [OFFER].[Subject].[Subject].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM [Warehouse] CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 2. Porównaj frekwencję uczniów na zajęciach w bieżącym i poprzednim miesiącu.
+SELECT NON EMPTY { [Measures].[Attendance on classes pos] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 3. Jakie są najczęściej wybierane przedmioty przez uczniów w bieżącym i poprzednim miesiącu?
+SELECT NON EMPTY { [Measures].[Number of classes done] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS * [OFFER].[Subject].[Subject].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 4. Porównaj frekwencję na zajęciach prowadzonych przez różnych nauczycieli w bieżącym i poprzednim miesiącu.
+SELECT NON EMPTY { [Measures].[Attendance on classes pos] } ON COLUMNS, NON EMPTY { ([TEACHER].[Name And Surname].[Name And Surname].ALLMEMBERS * [DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 5. Którzy nauczyciele mają najwyższą frekwencję uczniów w bieżącym i poprzednim miesiącu?
+SELECT NON EMPTY { [Measures].[Attendance on classes pos] } ON COLUMNS, NON EMPTY { ([TEACHER].[Name And Surname].[Name And Surname].ALLMEMBERS * [DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 6. Jak zmienił się poziom satysfakcji uczniów w bieżącym miesiącu w porównaniu do poprzedniego miesiąca?
+SELECT NON EMPTY { [Measures].[Average satisfaction level] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 7. Jak zmieniła się liczba godzin przeprowadzonych lekcji w bieżącym miesiącu w porównaniu do poprzedniego miesiąca? 
+SELECT NON EMPTY { [Measures].[Sum of minutes of classes done] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 8. Którzy nauczyciele mają największy wpływ na wzrost / spadek poziomu satysfakcji uczniów w bieżącym miesiącu?
+SELECT NON EMPTY { [Measures].[Average satisfaction level] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS * [TEACHER].[Name And Surname].[Name And Surname].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017].&[January] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 9. Jakie przedmioty mają największy wpływ na wzrost /spadek liczby godzin lekcji w bieżącym miesiącu?
+SELECT NON EMPTY { [Measures].[Sum of minutes of classes done] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS * [OFFER].[Subject].[Subject].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017].&[January] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
+
+-- 10. Jak zmienia się poziom satysfakcji uczniów w zależności od liczby godzin lekcji, które zostały zrealizowane na przestrzeni ostatnich sześciu miesięcy?
+SELECT NON EMPTY { [Measures].[Sum of minutes of classes done], [Measures].[Average satisfaction level] } ON COLUMNS, NON EMPTY { ([DATE].[Date hierarchy].[Month].ALLMEMBERS ) } DIMENSION PROPERTIES MEMBER_CAPTION, MEMBER_UNIQUE_NAME ON ROWS FROM ( SELECT ( { [DATE].[Date hierarchy].[Year].&[2017].&[January], [DATE].[Date hierarchy].[Year].&[2017].&[February], [DATE].[Date hierarchy].[Year].&[2017].&[March], [DATE].[Date hierarchy].[Year].&[2017].&[April], [DATE].[Date hierarchy].[Year].&[2017].&[May], [DATE].[Date hierarchy].[Year].&[2017].&[June] } ) ON COLUMNS FROM [Warehouse]) CELL PROPERTIES VALUE, BACK_COLOR, FORE_COLOR, FORMATTED_VALUE, FORMAT_STRING, FONT_NAME, FONT_SIZE, FONT_FLAGS
